@@ -1,0 +1,35 @@
+{
+  "extends": "@tsconfig/ember/tsconfig.json",
+  "noEmitOnError": false,
+  "allowSyntheticDefaultImports": true,
+  "compilerOptions": {
+    // Strictness settings -- you should *not* change these: Ember code is not
+    // guaranteed to type check with these set to looser values.
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "experimentalDecorators": true,
+    // You should feel free to change these, especially if you are already
+    // covering them via linting (e.g. with @typescript-eslint).
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noEmitOnError": false,
+    "noPropertyAccessFromIndexSignature": true,
+    // The combination of `baseUrl` with `paths` allows Ember's classic package
+    // layout, which is not resolvable with the Node resolution algorithm, to
+    // work with TypeScript.
+    "baseUrl": ".",
+    "paths": {
+      "thermos/tests/*": ["tests/*"],
+      "thermos/*": ["app/*"],
+      "*": ["types/*"],
+      "fetch": ["node_modules/ember-fetch"]
+    }
+  },
+  "include": ["app/**/*", "tests/**/*", "types/**/*", "e2e", "lib/**/*"],
+  "exclude": ["node_modules", "tmp", "vendor", "tests/custom", "tests/e2e"],
+  "sourceMap": true,
+  "inlineSourceMap": true,
+  "inlineSources": true
+}

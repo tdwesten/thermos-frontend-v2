@@ -1,0 +1,42 @@
+progam: Programma
+current_progam: Huidige programma
+label.email: Email-adres
+placeholder.email: Email-adres
+label.password: Wachtwoord
+placeholder.password: Wachtwoord
+button.login: Aanmelden
+header_title.login: Aanmelden
+login_message: >-
+  Vul hieronder uw gegevens in of <a href="{register_url}"
+  class="text-orange-500 hover:text-orange-600">registreer</a> als u geen
+  account heeft.
+validation.required: Dit veld is verplicht
+validation.email: Dit is geen geldig email-adres
+header_title.register: Thermostaat registeren
+register_message: Beschrijving
+button.register: Registeren
+label.firstName: Voornaam
+placeholder.firstName: Voornaam
+label.lastName: Achternaam
+placeholder.lastName: Achternaam
+top-bar.menu.programs: Progamma's
+top-bar.menu.settings: Instellingen
+top-bar.menu.logout: Uitloggen
+top-bar.menu.dashboard: Dashboard
+app.name: Thermos
+header_title.register-thermostat: Thermostaat aanmaken
+label.name: Naam
+placeholder.thermostat-name: Naam van de thermostat
+label.unit.name: Naam
+placeholder.unit.name: Naam van de Thermos
+header_title.settings: Instellingen
+programs.create_program: Nieuw progamma aanmaken
+settings_description: Set hier je Thermos naar eigen wens in.
+label.min-temp: Fallback temperature
+placeholder.min-temp: 'Minimale temperature wanneer er geen programma is '
+button.save: Opslaan
+header_title.programs.edit: Programma aanpassen
+label.start-time: Starttijd
+label.end-time: Eindtijd
+label.target_temperature: Temperatuur
+label.is-active: Actief

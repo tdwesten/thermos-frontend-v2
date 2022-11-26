@@ -1,0 +1,57 @@
+<div class="flex justify-center">
+  <form
+    class="grid w-full max-w-md grid-cols-6 gap-6 p-6 m-3 border border-gray-300"
+    {{on "submit" this.handleSubmit}}
+  >
+    <div class="col-span-6">
+      <h1 class="pb-3 text-2xl font-bold">{{t "header_title.register"}}</h1>
+      <p>{{t "register_message"}}</p>
+    </div>
+
+    <div class="col-span-6">
+      <ValidatedInput
+        @changeset={{this.changeset}}
+        @id="name"
+        @type="text"
+        @label={{t "label.unit.name"}}
+        @placeholder={{t "placeholder.unit.name"}}
+        @autocomplete="current-email"
+        @valuePath="name"
+      />
+    </div>
+    <div class="col-span-6">
+      <ValidatedInput
+        @changeset={{this.changeset}}
+        @id="email"
+        @type="text"
+        @label={{t "label.email"}}
+        @placeholder={{t "placeholder.email"}}
+        @autocomplete="current-email"
+        @valuePath="email"
+      />
+    </div>
+    <div class="col-span-6">
+      <ValidatedInput
+        @changeset={{this.changeset}}
+        @id="password"
+        @type="password"
+        @label={{t "label.password"}}
+        @placeholder={{t "placeholder.password"}}
+        @autocomplete="current-password"
+        @valuePath="password"
+      />
+    </div>
+    {{log this.changeset}}
+    <div class="flex justify-between">
+      <Button
+        @type="submit"
+        @isLoading={{false}}
+        @disabled={{or this.changeset.isInvalid this.changeset.isPristine}}
+        class="col-span-6"
+      >
+        {{t "button.register"}}
+      </Button>
+
+    </div>
+  </form>
+</div>

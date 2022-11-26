@@ -1,0 +1,49 @@
+<div class="flex justify-center">
+  <Form {{on "submit" this.handleLogin}}>
+    <div class="col-span-6 dark:text-slate-300">
+      <h1 class="pb-3 text-2xl font-semibold">
+        {{t "header_title.login"}}
+      </h1>
+      <p>{{t "login_message" register_url="/register" htmlSafe=true}}</p>
+    </div>
+    <div class="col-span-6">
+      <ValidatedInput
+        @changeset={{this.changeset}}
+        @id="email"
+        @type="text"
+        @label={{t "label.email"}}
+        @placeholder={{t "placeholder.email"}}
+        @autocomplete="current-email"
+        @valuePath="email"
+      />
+    </div>
+    <div class="col-span-6">
+      <ValidatedInput
+        @changeset={{this.changeset}}
+        @id="password"
+        @type="password"
+        @label={{t "label.password"}}
+        @placeholder={{t "placeholder.password"}}
+        @autocomplete="current-password"
+        @valuePath="password"
+      />
+    </div>
+    <div class="flex justify-between">
+      {{log
+        this.changeset.isInvalid
+        this.changeset.isDirty
+        this.changeset.isPristine
+        this.changeset.errors.length
+      }}
+      <Button
+        @type="submit"
+        @isLoading={{false}}
+        @disabled={{this.changeset.isInvalid}}
+        class="col-span-6"
+      >
+        {{t "button.login"}}
+      </Button>
+
+    </div>
+  </Form>
+</div>

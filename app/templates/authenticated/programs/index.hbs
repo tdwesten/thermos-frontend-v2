@@ -1,0 +1,36 @@
+<div class="flex justify-end w-full">
+  <Button @route="authenticated.programs.create">
+    {{t "programs.create_program"}}
+  </Button>
+</div>
+<LinkTo @route="authenticated.programs.create" />
+
+<div class="flex flex-col mt-4">
+  {{#each @model as |program|}}
+    <LinkTo
+      @route="authenticated.programs.edit"
+      @model={{program.id}}
+      class="w-full p-3 border-b hover:bg-gray-100 dark:hover:bg-slate-700 dark:border-slate-500 first:rounded-t-md last:rounded-b-md first:border-t border-x"
+    >
+      <span class="flex items-center justify-between font-semibold">
+        <span class="dark:text-slate-300">
+          {{program.name}}
+        </span>
+        <span
+          class="rounded-full ml-2
+            {{if program.isCurrentProgram 'bg-green-600' 'bg-gray-500'}}
+            w-2 h-2 inline-block"
+        ></span>
+      </span>
+      <span class="flex justify-between">
+        <span class="text-gray-500">
+          <Days @days={{program.days}} />
+        </span>
+        <span class="text-gray-500">{{program.startTime}}
+          -
+          {{program.endTime}}</span>
+
+      </span>
+    </LinkTo>
+  {{/each}}
+</div>

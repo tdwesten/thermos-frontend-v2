@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "lokalise.i18n-ally",
+    "lifeart.vscode-glimmer-syntax",
+    "dbaeumer.vscode-eslint",
+    "usernamehw.errorlens",
+    "editorconfig.editorconfig",
+    "bradlc.vscode-tailwindcss",
+    "mattpocock.ts-error-translator",
+    "DSKWRK.vscode-generate-getter-setter"
+  ]
+}
