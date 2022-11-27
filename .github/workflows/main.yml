@@ -15,7 +15,7 @@ jobs:
     environment: staging
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
@@ -28,12 +28,6 @@ jobs:
 
       - name: Install deps
         run: yarn install --silent
-
-      # - name: Linting
-      #   run: yarn lint --silent
-
-      - name: set .env
-        run: echo "${{ secrets.ENV_VARS }}" > .env
 
       - name: Build application
         run: yarn run build --environment=${{secrets.ENV_NAME}} --silent
