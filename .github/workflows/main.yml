@@ -15,6 +15,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "yarn"
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
@@ -26,10 +30,10 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Install deps
-        run: yarn install --silent
+        run: yarn install --frozen-lockfile
 
       - name: Build application
-        run: yarn run build --environment=${{secrets.ENV_NAME}} --silent
+        run: yarn run build --environment=${{secrets.ENV_NAME}}
 
       - name: Deploy with rsync
         run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}
