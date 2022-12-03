@@ -8,6 +8,8 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route("login");
+  this.route("logout");
+  this.route("register");
   this.route("authenticated", function () {
     this.route("dashboard");
     this.route("settings");
@@ -16,6 +18,4 @@ Router.map(function () {
       this.route("create");
     });
   });
-  this.route("logout");
-  this.route("register");
 });

@@ -50,10 +50,6 @@ export default class TopBar extends Component<TopBarArgs> {
         route: "logout",
       },
     ];
-
-    this.router.on("routeWillChange", () => {
-      this.showMenu = false;
-    });
   }
 
   get isAuthenticated() {

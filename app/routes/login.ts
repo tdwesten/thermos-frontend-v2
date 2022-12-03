@@ -5,6 +5,6 @@ import SessionService from "../services/session";
 export default class Login extends Route {
   @service declare session: SessionService;
   beforeModel() {
-    this.session.prohibitAuthentication("authenticated.dashboard");
+    // this.session.prohibitAuthentication("authenticated.dashboard");
   }
 }

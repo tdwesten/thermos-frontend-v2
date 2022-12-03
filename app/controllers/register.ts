@@ -11,23 +11,30 @@ import SessionService from "../services/session";
 import { BufferedChangeset } from "validated-changeset";
 import ENV from "../config/environment";
 import REGISTER_VALIDATIONS from "../validations/register";
-import Thermostat from "../models/thermostat";
+
+interface RegisterCredentials {
+  email: string;
+  password: string;
+  name: string;
+}
 
 export default class RegisterController extends Controller {
   @service declare session: SessionService;
   @service declare store: Store;
   @service declare router: RouterService;
 
-  @tracked thermostat: Thermostat;
+  @tracked credentials: RegisterCredentials = {
+    name: "",
+    email: "",
+    password: "",
+  };
   @tracked changeset: BufferedChangeset;
 
   constructor() {
     super(...arguments);
 
-    this.thermostat = this.store.createRecord("thermostat");
-
     this.changeset = Changeset(
-      this.thermostat,
+      this.credentials,
       lookupValidator(REGISTER_VALIDATIONS),
       REGISTER_VALIDATIONS
     );
@@ -46,11 +53,7 @@ export default class RegisterController extends Controller {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: this.thermostat.name,
-        email: this.thermostat.email,
-        password: this.thermostat.password,
-      }),
+      body: JSON.stringify(this.credentials),
     })
       .then((response) => response.json())
       .then((response) => {
@@ -58,8 +61,8 @@ export default class RegisterController extends Controller {
           console.log(response.error);
         } else {
           this.session.authenticate("authenticator:token", {
-            email: this.thermostat.email,
-            password: this.thermostat.password,
+            email: this.credentials.email,
+            password: this.credentials.password,
           });
           this.changeset.rollback();
         }

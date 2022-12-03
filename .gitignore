@@ -6,7 +6,6 @@ public/assets/tailwind.css
 
 /dist/
 /tmp/
-/storybook-static/
 
 # dependencies
 /bower_components/
@@ -35,8 +34,6 @@ public/assets/tailwind.css
 # broccoli-debug
 /DEBUG/
 .DS_Store
-/.storybook/preview-head.html
-build-storybook.log
 /test-results/
 /playwright-report/
 /playwright/.cache/

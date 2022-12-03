@@ -11,4 +11,7 @@
  * @param  {Object} options.content
  * @return {Promise|Boolean|Any}
  */
-export default function handleMultipleValidations(validators: any[], { key, newValue, oldValue, changes, content }: string): Promise<any> | boolean | Any;
+export default function handleMultipleValidations(
+  validators: any[],
+  { key, newValue, oldValue, changes, content }: string
+): Promise<any> | boolean | any;

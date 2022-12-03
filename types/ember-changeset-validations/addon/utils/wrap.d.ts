@@ -1,3 +1,5 @@
+import Ember from "ember";
+
 /**
  * Wraps a value in an Ember.Array.
  *
@@ -5,4 +7,4 @@
  * @param  {Any} value
  * @return {Ember.Array}
  */
-export default function wrapInArray(value: Any): Ember.Array;
+export default function wrapInArray(value: any): Ember.Array;

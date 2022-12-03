@@ -5,6 +5,7 @@ import SessionService from "../services/session";
 
 export default class Aauthenticated extends Route {
   @service declare session: SessionService;
+
   beforeModel(transition: Transition) {
     this.session.requireAuthentication(transition, "login");
   }

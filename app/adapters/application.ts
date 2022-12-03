@@ -5,7 +5,7 @@ import { inject as service } from "@ember/service";
 import ENV from "../config/environment";
 
 interface IHeaders {
-  Authorization: any;
+  Authorization: string | undefined;
 }
 export default class ApplicationAdapter extends JSONAPIAdapter {
   @service private declare session;
@@ -30,7 +30,12 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     return headers;
   }
 
-  handleResponse(status: number, headers: any, payload: any, requestData: any) {
+  handleResponse(
+    status: number,
+    headers: Headers,
+    payload: Record<string, unknown>,
+    requestData: Record<string, unknown>
+  ) {
     if (status === 401 && this.session.isAuthenticated) {
       // this.session.invalidate();
     }

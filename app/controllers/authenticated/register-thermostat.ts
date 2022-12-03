@@ -19,8 +19,8 @@ export default class RegisterThermostatController extends Controller {
   @tracked thermostat: Thermostat;
   @tracked changeset: BufferedChangeset;
 
-  constructor() {
-    super(...arguments);
+  constructor(args: any) {
+    super(...args);
 
     this.thermostat = this.store.createRecord("thermostat");
 

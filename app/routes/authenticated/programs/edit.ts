@@ -1,6 +1,6 @@
 import Route from "@ember/routing/route";
 import { service } from "@ember/service";
-import Store from "ember-data/store";
+import Store from "@ember-data/store";
 
 export default class AuthenticatedProgramsProgram extends Route {
   @service declare store: Store;

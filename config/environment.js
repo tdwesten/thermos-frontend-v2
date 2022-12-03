@@ -27,7 +27,7 @@ module.exports = function (environment) {
   ENV["APP"]["apiHost"] = process.env.apiServer;
 
   if (environment === "development") {
-    ENV["APP"]["apiHost"] = "http://api.thermos.test/api";
+    ENV["APP"]["apiHost"] = "https://api.thermos.test/api";
   }
 
   if (environment === "staging") {

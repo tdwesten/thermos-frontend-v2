@@ -18,8 +18,8 @@ export default class AuthenticatedSettings extends Controller {
   @service declare store: Store;
   @service declare router: RouterService;
 
-  @tracked changeset: BufferedChangeset;
-  @tracked isLoading: boolean = false;
+  @tracked declare changeset: BufferedChangeset;
+  @tracked isLoading = false;
 
   constructor() {
     super(...arguments);
@@ -31,7 +31,7 @@ export default class AuthenticatedSettings extends Controller {
         THERMOSTAT_VALIDATIONS
       );
     } else {
-      this.router.transitionTo("authenticated.login");
+      this.router.transitionTo("login");
     }
   }
 
