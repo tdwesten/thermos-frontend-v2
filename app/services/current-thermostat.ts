@@ -2,7 +2,7 @@ import RouterService from "@ember/routing/router-service";
 import Service from "@ember/service";
 import { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
-import Store from "ember-data/store";
+import Store from "@ember-data/store";
 import Thermostat from "../models/thermostat";
 
 export default class CurrentThermostatService extends Service {

@@ -33,10 +33,32 @@ header_title.settings: Instellingen
 programs.create_program: Nieuw progamma aanmaken
 settings_description: Set hier je Thermos naar eigen wens in.
 label.min-temp: Fallback temperature
-placeholder.min-temp: 'Minimale temperature wanneer er geen programma is '
+placeholder.min-temp: "Minimale temperature wanneer er geen programma is "
 button.save: Opslaan
 header_title.programs.edit: Programma aanpassen
 label.start-time: Starttijd
 label.end-time: Eindtijd
-label.target_temperature: Temperatuur
+label.targetTemperature: Temperatuur
 label.is-active: Actief
+placeholder.targetTemperature: Richt temperatuur
+label.startTime: Starttijd
+label.endTime: Eindtijd
+programs.create.name: Naam
+programs.create.name.placeholder: Naam van het programma
+header_title.programs.create: Programma aanmaken
+day.monday: Maandag
+day.tuesday: Dinsdag
+day.wednesday: Woensdag
+day.thursday: Donderdag
+day.friday: Vrijdag
+day.saturday: Zaterdag
+day.sunday: Zondag
+label.delete: Verwijderen
+programs.update.success: Programma succesvol opgeslagen.
+label.save: Opslaan
+widget.status.default: Standby.. Minimale temperatuur {targetTemperature}°C
+widget.status.default.heating: Verwarmen naar {targetTemperature}°C
+widget.status.manual: Standby..
+widget.status.manual.heating: Verwarmen naar {targetTemperature}°C
+widget.status.program: Volgt programa "{progam}".. Richt temperature is {targetTemperature}°C
+widget.status.program.heating: Verwarmen volgens {program} naar {targetTemperature}°C

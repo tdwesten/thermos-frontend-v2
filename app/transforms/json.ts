@@ -1,18 +1,18 @@
-import DS from "ember-data";
+import Transform from "@ember-data/serializer/transform";
 
-const Json = DS.Transform.extend({
+class Json extends Transform {
   deserialize(serialized: string) {
-    return JSON.parse(serialized);
-  },
+    return JSON.parse(serialized) || [];
+  }
 
   serialize(deserialized: []) {
     return JSON.stringify(deserialized);
-  },
-});
+  }
+}
 
 declare module "ember-data/types/registries/transform" {
   export default interface TransformRegistry {
-    json: Json;
+    json: typeof Json;
   }
 }
 

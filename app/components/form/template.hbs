@@ -4,9 +4,9 @@
       {{yield
         (hash
           changeset=this.changeset
+          errors=this.errors
           isValid=this.isValid
           isInvalid=this.isInvalid
-          errors=this.errors
           isLoading=@isLoading
         )
       }}

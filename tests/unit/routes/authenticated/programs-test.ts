@@ -5,7 +5,7 @@ module("Unit | Route | authenticated/programs", function (hooks) {
   setupTest(hooks);
 
   test("it exists", function (assert) {
-    let route = this.owner.lookup("route:authenticated/programs");
+    const route = this.owner.lookup("route:authenticated/programs");
     assert.ok(route);
   });
 });

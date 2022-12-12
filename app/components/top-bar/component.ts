@@ -50,6 +50,11 @@ export default class TopBar extends Component<TopBarArgs> {
         route: "logout",
       },
     ];
+
+    // on router change, hide menu
+    this.router.on("routeDidChange", () => {
+      this.showMenu = false;
+    });
   }
 
   get isAuthenticated() {
@@ -58,6 +63,10 @@ export default class TopBar extends Component<TopBarArgs> {
 
   get title() {
     return this.currentThermostat.thermostat?.name || this.intl.t("app.name");
+  }
+
+  get temperature() {
+    return this.currentThermostat.thermostat?.currentTemperature;
   }
 
   @action

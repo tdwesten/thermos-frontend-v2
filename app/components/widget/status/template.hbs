@@ -3,20 +3,28 @@
 >
   <div>
     <div class="relative font-bold tracking-tighter text-center text-7xl">
-      {{@currentTemperature}}
+      {{this.currentTemperature}}
       <span class="absolute text-2xl font-normal translate-x-1/2 top-1">
         {{@unit}}
       </span>
+
     </div>
-    <div class="text-center dark:text-slate-500">
+    <div
+      class="flex items-center justify-center gap-3 mt-2 text-center dark:text-slate-500"
+    >
       <Icon
-        @name="local_fire_department"
-        class="text-sm dark:text-slate-400 translate-y-1.5"
+        @name={{this.currentState.icon}}
+        class="text-sm dark:text-slate-400"
       />
-      opwarmen naar
-      <span>
-        {{@targetTemperature}}{{@unit}}
+      <span class="mt-1">
+        {{this.currentState.message}}
       </span>
+      {{#if this.isHeating}}
+        <Icon
+          @name="local_fire_department"
+          class="text-sm text-red-600 animate-pulse"
+        />
+      {{/if}}
     </div>
   </div>
 </div>

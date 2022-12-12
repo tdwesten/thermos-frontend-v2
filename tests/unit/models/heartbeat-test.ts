@@ -8,8 +8,8 @@ module("Unit | Model | heartbeat", function (hooks) {
 
   // Replace this with your real tests.
   test("it exists", function (assert) {
-    let store = this.owner.lookup("service:store") as Store;
-    let model = run(() => store.createRecord("heartbeat", {}));
+    const store = this.owner.lookup("service:store") as Store;
+    const model = run(() => store.createRecord("heartbeat", {}));
     assert.ok(model);
   });
 });

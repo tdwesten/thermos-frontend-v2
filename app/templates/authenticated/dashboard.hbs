@@ -1,11 +1,5 @@
 {{page-title "Dashboard"}}
 <div class="flex flex-col justify-between h-full">
-  <Widget::Status
-    @currentTemperature={{@model.currentTemperature}}
-    @targetTemperature={{@model.targetTemperature}}
-    @unit={{"°C"}}
-    @program={{@model.currentProgram}}
-    @heaterState={{true}}
-  />
+  <Widget::Status @unit={{"°C"}} @thermostat={{@model}} />
   <Widget::ActionButtons />
 </div>

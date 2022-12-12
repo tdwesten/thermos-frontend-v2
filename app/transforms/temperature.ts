@@ -1,18 +1,18 @@
-import DS from "ember-data";
+import Transform from "@ember-data/serializer/transform";
 
-const Temperature = DS.Transform.extend({
+class Temperature extends Transform {
   deserialize(serialized: number) {
     return serialized / 100;
-  },
+  }
 
   serialize(deserialized: number) {
     return deserialized * 100;
-  },
-});
+  }
+}
 
 declare module "ember-data/types/registries/transform" {
   export default interface TransformRegistry {
-    temperature: Temperature;
+    temperature: typeof Temperature;
   }
 }
 

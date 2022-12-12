@@ -18,7 +18,7 @@
         </span>
         <span
           class="rounded-full ml-2
-            {{if program.isCurrentProgram 'bg-green-600' 'bg-gray-500'}}
+            {{if program.isActive 'bg-green-600' 'bg-gray-500'}}
             w-2 h-2 inline-block"
         ></span>
       </span>
@@ -26,10 +26,11 @@
         <span class="text-gray-500">
           <Days @days={{program.days}} />
         </span>
-        <span class="text-gray-500">{{program.startTime}}
+        <span class="text-gray-500">
+          {{program.startTime}}
           -
-          {{program.endTime}}</span>
-
+          {{program.endTime}}
+        </span>
       </span>
     </LinkTo>
   {{/each}}

@@ -1,13 +1,14 @@
 {{#if this.session.isAuthenticated}}
-
   <div
-    class="absolute top-0 left-0 right-0 flex items-center justify-center h-16 p-4 font-medium border-b dark:border-slate-600 font-display text-slate-600 dark:text-slate-300"
+    class="sticky top-0 left-0 right-0 flex items-center justify-center h-16 p-4 font-medium bg-white border-b dark:bg-slate-800 dark:border-slate-600 font-display text-slate-600 dark:text-slate-300"
   >
     <LinkTo @route="authenticated.dashboard" class="mr-auto">
       <Icon @name="thermostat" />
     </LinkTo>
     <LinkTo @route="authenticated.dashboard">
       {{this.title}}
+      /
+      {{this.temperature}}°C
     </LinkTo>
     <button
       {{on "click" this.toggleMenu}}

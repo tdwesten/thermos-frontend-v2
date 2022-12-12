@@ -7,6 +7,6 @@ interface DaysArgs {
 
 export default class Days extends Component<DaysArgs> {
   get days() {
-    return this.args.days.map((day) => ProgramDays[day]);
+    return this.args?.days?.map((day) => ProgramDays[day]);
   }
 }

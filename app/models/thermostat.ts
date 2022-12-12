@@ -1,6 +1,7 @@
 import Model, { attr, belongsTo, hasMany } from "@ember-data/model";
 import Program from "./program";
 import { memberAction, serializeAndPush } from "ember-api-actions";
+import { Mode } from "../enums/mode";
 
 export default class Thermostat extends Model {
   @attr("string") declare name: string;
@@ -8,12 +9,26 @@ export default class Thermostat extends Model {
   @attr("temperature") declare targetTemperature: number;
   @attr("temperature") declare minTemperature: number;
   @attr("date") declare updatedAt: Date;
+  @attr("boolean") declare isHeating: boolean;
+  @attr("string") declare mode: string;
 
   @belongsTo("program", { async: true, inverse: null })
   declare currentProgram: Program;
 
   @hasMany("program", { async: true, inverse: null })
   declare programs: Program;
+
+  get isProgramMode(): boolean {
+    return this.mode === Mode.Program;
+  }
+
+  get isManualMode(): boolean {
+    return this.mode === Mode.Manual;
+  }
+
+  get isDefaultMode(): boolean {
+    return this.mode === Mode.Default;
+  }
 
   reset = memberAction({
     path: "-actions/reset",

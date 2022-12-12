@@ -6,6 +6,8 @@ export default class AuthenticatedProgramsProgram extends Route {
   @service declare store: Store;
 
   model(params: { program_id: string }) {
-    return this.store.findRecord("program", params.program_id);
+    return this.store.findRecord("program", params.program_id, {
+      include: "thermostat",
+    });
   }
 }

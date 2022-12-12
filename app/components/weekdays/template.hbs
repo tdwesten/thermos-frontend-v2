@@ -1,0 +1,19 @@
+<div>
+  <Label @id={{@id}}>
+    {{@label}}
+  </Label>
+  <div class="flex flex-col mt-1 border rounded dark:border-slate-500">
+    {{#each this.weekdays as |weekday|}}
+      <Label @id={{weekday.id}} class="p-3 border-b dark:border-slate-500">
+
+        <Input
+          id={{weekday.id}}
+          @type="checkbox"
+          @checked={{if (contains @model.days weekday.id) "checked" ""}}
+          {{on "change" (fn this.handleCheckboxChange weekday)}}
+        />
+        {{weekday.name}}
+      </Label>
+    {{/each}}
+  </div>
+</div>

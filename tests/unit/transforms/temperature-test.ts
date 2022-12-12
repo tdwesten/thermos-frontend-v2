@@ -9,7 +9,7 @@ module(
 
     // Replace this with your real tests.
     test("it exists", function (assert) {
-      let transform = this.owner.lookup("transform:temperature");
+      const transform = this.owner.lookup("transform:temperature");
       assert.ok(transform);
     });
   }

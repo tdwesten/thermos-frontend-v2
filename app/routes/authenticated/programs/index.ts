@@ -1,11 +1,11 @@
-import Store from "@ember-data/store";
 import Route from "@ember/routing/route";
 import { inject as service } from "@ember/service";
+import CurrentThermostatService from "../../../services/current-thermostat";
 
 export default class AuthenticatedProgramsIndex extends Route {
-  @service declare store: Store;
+  @service declare currentThermostat: CurrentThermostatService;
 
   model() {
-    return this.store.findAll("program");
+    return this.currentThermostat.thermostat?.programs;
   }
 }

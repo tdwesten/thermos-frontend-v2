@@ -1,78 +1,70 @@
-<div class="flex justify-center">
-  <Form
-    @onSubmit={{this.onSubmit}}
-    @model={{@model}}
-    class="grid w-full max-w-md grid-cols-6 gap-6 p-6 m-3 border border-gray-300 dark:border-slate-700"
-    as |form|
-  >
-    <div class="col-span-6 dark:text-slate-300">
-      <h1 class="pb-3 text-2xl font-semibold">
-        {{t "header_title.programs.edit"}}
-      </h1>
-      <p class="pb-3 text-sm text-gray-500 dark:text-slate-400">
-        {{t "header_title.programs.edit_description"}}
-      </p>
-    </div>
-    <div class="col-span-6">
-      <ValidatedInput
-        @changeset={{form.changeset}}
-        @id="name"
-        @type="text"
-        @label={{t "label.name"}}
-        @placeholder={{t "placeholder.thermostat-name"}}
-        @autocomplete=""
-        @valuePath="name"
-      />
-    </div>
-    <div class="col-span-6">
-      <ValidatedInput
-        @changeset={{form.changeset}}
-        @id="targetTemperature"
-        @type="number"
-        step="0.25"
-        @label={{t "label.target_temperature"}}
-        @placeholder={{t "placeholder.min-temp"}}
-        @valuePath="targetTemperature"
-      />
-    </div>
-    <div class="col-span-6">
-      <ValidatedInput
-        @changeset={{form.changeset}}
-        @id="startTime"
-        @type="time"
-        @label={{t "label.start-time"}}
-        @placeholder={{t "placeholder.min-temp"}}
-        @valuePath="startTime"
-      />
-    </div>
-    <div class="col-span-6">
-      <ValidatedInput
-        @changeset={{form.changeset}}
-        @id="endTime"
-        @type="time"
-        @label={{t "label.end-time"}}
-        @placeholder={{t "placeholder.min-temp"}}
-        @valuePath="endTime"
-      />
-    </div>
-    <div class="col-span-6">
-      <ValidatedInput
-        @changeset={{form.changeset}}
-        @id="isActive"
-        @type="checkbox"
-        @label={{t "label.is-active"}}
-        @valuePath="isActive"
-      />
-    </div>
-    <div class="flex justify-between">
-      <Button
-        @type="submit"
-        @isLoading={{this.isLoading}}
-        @disabled={{or form.changeset.isInvalid}}
-        class="col-span-6"
-      >
-        {{t "button.save"}}
-      </Button>
-    </div>
-  </Form>
-</div>
+<Form
+  @model={{@model}}
+  @validation={{this.formValidations}}
+  @onSubmit={{this.onSubmit}}
+  class="flex flex-col gap-4"
+  as |form|
+>
+  <div class="col-span-6 dark:text-slate-300">
+    <h1 class="pb-3 text-2xl font-semibold">
+      {{t "header_title.programs.create"}}
+    </h1>
+  </div>
+
+  {{#if this.showSuccessMessage}}
+    <FlashMessage>
+      {{t "programs.update.success"}}
+    </FlashMessage>
+  {{/if}}
+
+  <ValidatedInput
+    @label={{t "programs.create.name"}}
+    @placeholder={{t "programs.create.name.placeholder"}}
+    @changeset={{form.changeset}}
+    @valuePath="name"
+  />
+  <ValidatedInput
+    @label={{t "label.targetTemperature"}}
+    @type="number"
+    step="0.25"
+    @placeholder={{t "placeholder.targetTemperature"}}
+    @changeset={{form.changeset}}
+    @valuePath="targetTemperature"
+  />
+  <ValidatedInput
+    @label={{t "label.startTime"}}
+    @type="time"
+    @changeset={{form.changeset}}
+    @valuePath="startTime"
+  />
+  <ValidatedInput
+    @label={{t "label.endTime"}}
+    @type="time"
+    @changeset={{form.changeset}}
+    @valuePath="endTime"
+  />
+  <label for="isActive">
+    <Input
+      id="isActive"
+      @type="checkbox"
+      @checked={{form.changeset.isActive}}
+      @onChange={{fn
+        (mut form.changeset.isActive)
+        (not form.changeset.isActive)
+      }}
+    />
+    {{t "label.is-active"}}
+  </label>
+
+  <Weekdays @model={{form.changeset}} @label="Dagen" />
+
+  <div class="flex justify-between gap-4">
+    <Button {{on "click" (fn this.deleteProgram @model)}}>
+      {{t "label.delete"}}
+    </Button>
+    <Button @type="submit" @disabled={{form.changeset.isInvalid}}>
+      {{t "label.save"}}
+    </Button>
+  </div>
+
+</Form>

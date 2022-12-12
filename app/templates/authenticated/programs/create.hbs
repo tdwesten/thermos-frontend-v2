@@ -1,3 +1,61 @@
-<Form @model={{@model}} @validation as |changeset|>
-  <ValidatedInput @model={{changeset}} @property="name" />
+<Form
+  @model={{@model}}
+  @validation={{this.formValidations}}
+  class="flex flex-col gap-4"
+  as |form|
+>
+  <div class="col-span-6 dark:text-slate-300">
+    <h1 class="pb-3 text-2xl font-semibold">
+      {{t "header_title.programs.create"}}
+    </h1>
+    <p class="pb-3 text-sm text-gray-500 dark:text-slate-400">
+      {{t "header_title.programs.edit_description"}}
+    </p>
+  </div>
+
+  <ValidatedInput
+    @label={{t "programs.create.name"}}
+    @placeholder={{t "programs.create.name.placeholder"}}
+    @changeset={{form.changeset}}
+    @valuePath="name"
+  />
+  <ValidatedInput
+    @label={{t "label.targetTemperature"}}
+    @type="number"
+    @placeholder={{t "placeholder.targetTemperature"}}
+    @changeset={{form.changeset}}
+    @valuePath="targetTemperature"
+  />
+  <ValidatedInput
+    step="60"
+    @label={{t "label.startTime"}}
+    @type="time"
+    @changeset={{form.changeset}}
+    @valuePath="startTime"
+  />
+  <ValidatedInput
+    @label={{t "label.endTime"}}
+    @type="time"
+    @changeset={{form.changeset}}
+    @valuePath="endTime"
+  />
+  <label for="isActive">
+    <Input
+      id="isActive"
+      @type="checkbox"
+      @checked={{form.changeset.isActive}}
+      @onChange={{fn
+        (mut form.changeset.isActive)
+        (not form.changeset.isActive)
+      }}
+    />
+    {{t "label.is-active"}}
+  </label>
+
+  <Weekdays @model={{form.changeset}} @label="Dagen" />
+
+  <Button @type="submit" @disabled={{form.changeset.isInvalid}}>
+    Toevoegen
+  </Button>
+
 </Form>
