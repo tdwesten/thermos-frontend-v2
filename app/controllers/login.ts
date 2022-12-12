@@ -13,41 +13,23 @@ export default class LoginController extends Controller {
   @service declare session: SessionService;
   @service declare store: Store;
   @service declare router: RouterService;
-  @tracked credentials = {
-    email: "",
-    password: "",
-  };
 
-  @tracked changeset = Changeset(
-    this.credentials,
-    lookupValidator(LOGINVALIDATIONS),
-    LOGINVALIDATIONS
-  );
+  formValidations = LOGINVALIDATIONS;
 
   @action
   handleLogin(event: SubmitEvent): void {
     event.preventDefault();
 
-    this.changeset.execute();
-
     this.session
       .authenticate("authenticator:jwt", {
-        email: this.credentials.email,
-        password: this.credentials.password,
+        email: this.model.email,
+        password: this.model.password,
       })
       .then(() => {
-        this.changeset.rollback();
-        this.changeset.set("email", "");
-        this.changeset.set("password", "");
-
         this.router.transitionTo("authenticated.dashboard");
       })
       .catch((error) => {
         console.log(error);
-
-        this.changeset.set("email", "");
-        this.changeset.set("password", "");
-        this.changeset.set("errors", error.errors);
       });
   }
 

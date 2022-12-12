@@ -1,8 +1,10 @@
 <div class="flex justify-center">
   <Form
+    @model={{@model}}
+    @validations={{this.formValidations}}
     @onSubmit={{this.handleLogin}}
-    @model={{this.changeset}}
     class="flex flex-col gap-6"
+    as |form|
   >
     <div class="col-span-6 dark:text-slate-300">
       <h1 class="pb-3 text-2xl font-semibold">
@@ -12,7 +14,7 @@
     </div>
 
     <ValidatedInput
-      @changeset={{this.changeset}}
+      @changeset={{form.changeset}}
       @id="email"
       @type="text"
       @label={{t "label.email"}}
@@ -22,7 +24,7 @@
     />
 
     <ValidatedInput
-      @changeset={{this.changeset}}
+      @changeset={{form.changeset}}
       @id="password"
       @type="password"
       @label={{t "label.password"}}
@@ -33,8 +35,8 @@
 
     <Button
       @type="submit"
-      @isLoading={{false}}
-      @disabled={{this.changeset.isInvalid}}
+      @isLoading={{form.isLoading}}
+      @disabled={{form.isInvalid}}
       class="col-span-6"
     >
       {{t "button.login"}}

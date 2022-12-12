@@ -1,10 +1,14 @@
+import Store from "@ember-data/store";
 import Route from "@ember/routing/route";
-import { inject as service } from "@ember/service";
-import SessionService from "../services/session";
+import { service } from "@ember/service";
 
 export default class Login extends Route {
-  @service declare session: SessionService;
-  beforeModel() {
-    // this.session.prohibitAuthentication("authenticated.dashboard");
+  @service declare store: Store;
+
+  model() {
+    return {
+      email: "",
+      password: "",
+    };
   }
 }

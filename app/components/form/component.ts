@@ -23,9 +23,10 @@ export default class Form extends Component<FormArgs> {
   @tracked public declare changeset: BufferedChangeset;
   @tracked public errors: any = [];
   @tracked public isValid = false;
+  @tracked public isPristine = false;
 
   get isInvalid() {
-    return this.isValid === this.changeset.isInvalid || false;
+    return !this.isValid || this.isPristine;
   }
 
   constructor(owner: unknown, args: FormArgs) {
@@ -40,6 +41,12 @@ export default class Form extends Component<FormArgs> {
       lookupValidator(this.args.validations),
       this.args.validations
     );
+
+    this.changeset.on("afterValidation", () => {
+      this.errors = this.changeset.error;
+      this.isValid = this.changeset.isValid;
+      this.isPristine = this.changeset.isPristine;
+    });
   }
 
   @action
@@ -58,13 +65,12 @@ export default class Form extends Component<FormArgs> {
   @action
   submit(event: Event) {
     event.preventDefault();
+
     this.changeset.validate().then(() => {
-      this.isValid = this.changeset.isValid;
       this.errors = this.changeset.error;
 
-      this.changeset.execute();
-
       if (this.changeset.isValid) {
+        this.changeset.execute();
         this.args.onSubmit(event);
       }
     });

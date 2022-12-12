@@ -49,7 +49,7 @@ export default class WidgetStatus extends Component<WidgetStatusArgs> {
   }
 
   get currentTemperature(): number {
-    return this.args.thermostat.currentTemperature;
+    return this.args.thermostat?.currentTemperature;
   }
 
   get isHeating(): boolean {
