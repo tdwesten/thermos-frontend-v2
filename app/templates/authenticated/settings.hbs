@@ -1,42 +1,76 @@
-<div class="flex justify-center">
-  <Form {{on "submit" this.handleSave}}>
-    <div class="col-span-6 dark:text-slate-300">
-      <h1 class="pb-3 text-2xl font-semibold">
-        {{t "header_title.settings"}}
-      </h1>
-      <p>{{t "settings_description"}}</p>
-    </div>
-    <div class="col-span-6">
-      <ValidatedInput
-        @changeset={{this.changeset}}
-        @id="name"
-        @type="text"
-        @label={{t "label.name"}}
-        @placeholder={{t "placeholder.thermostat-name"}}
-        @autocomplete=""
-        @valuePath="name"
-      />
-    </div>
-    <div class="col-span-6">
-      <ValidatedInput
-        @changeset={{this.changeset}}
-        @id="min-temp"
-        @type="number"
-        @label={{t "label.min-temp"}}
-        @placeholder={{t "placeholder.min-temp"}}
-        @valuePath="minTemperature"
-      />
-    </div>
-    <div class="flex justify-between">
-      <Button
-        @type="submit"
-        @isLoading={{this.isLoading}}
-        @disabled={{or this.changeset.isInvalid}}
-        class="col-span-6"
-      >
-        {{t "button.save"}}
-      </Button>
+<Form
+  @model={{@model}}
+  @validation={{this.formValidations}}
+  @onSubmit={{this.onSubmit}}
+  class="flex flex-col gap-4"
+  as |form|
+>
+  <div class="col-span-6 dark:text-slate-300">
+    <h1 class="pb-3 text-2xl font-semibold">
+      {{t "header_title.settings"}}
+    </h1>
+    <p>{{t "settings_description"}}</p>
+  </div>
 
-    </div>
-  </Form>
-</div>
+  {{#if this.showSuccessMessage}}
+    <FlashMessage>
+      {{t "thermostat.update.success"}}
+    </FlashMessage>
+  {{/if}}
+
+  <div class="flex flex-col gap-4 p-4 rounded bg-slate-300">
+    <h2 class="pb-3 text-xl font-semibold dark:text-slate-300">
+      {{t "header_title.connection"}}
+    </h2>
+    <ValidatedInput
+      @changeset={{this.changeset}}
+      @id="endpoint"
+      @readonly={{true}}
+      @type="text"
+      @label={{t "label.endpoint"}}
+      @value="{{concat
+        'https://thermos-api.thomasvanderwesten.nl/api/v1/thermostats/'
+        @model.id
+        '/-actions/sync'
+      }}"
+    />
+    <ValidatedInput
+      @changeset={{this.changeset}}
+      @id="name"
+      @readonly={{true}}
+      @type="text"
+      @label={{t "label.token"}}
+      @autocomplete=""
+      @value="{{@model.token}}"
+    />
+  </div>
+
+  <ValidatedInput
+    @changeset={{form.changeset}}
+    @id="name"
+    @type="text"
+    @label={{t "label.name"}}
+    @placeholder={{t "placeholder.thermostat-name"}}
+    @autocomplete=""
+    @valuePath="name"
+  />
+  <ValidatedInput
+    @changeset={{form.changeset}}
+    @id="min-temp"
+    @type="number"
+    @label={{t "label.min-temp"}}
+    @placeholder={{t "placeholder.min-temp"}}
+    @valuePath="minTemperature"
+  />
+  <div class="flex justify-between">
+    <Button
+      @type="submit"
+      @isLoading={{form.isLoading}}
+      @disabled={{or form.changeset.isInvalid}}
+      class="col-span-6"
+    >
+      {{t "button.save"}}
+    </Button>
+
+  </div>
+</Form>

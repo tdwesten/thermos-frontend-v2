@@ -11,6 +11,7 @@ import lookupValidator from "ember-changeset-validations";
 import CurrentThermostatService from "../../services/current-thermostat";
 import SessionService from "../../services/session";
 import THERMOSTAT_VALIDATIONS from "../../validations/thermostat";
+import { later } from "@ember/runloop";
 
 export default class AuthenticatedSettings extends Controller {
   @service declare session: SessionService;
@@ -20,6 +21,9 @@ export default class AuthenticatedSettings extends Controller {
 
   @tracked declare changeset: BufferedChangeset;
   @tracked isLoading = false;
+  @tracked showSuccessMessage = false;
+
+  formValidations = THERMOSTAT_VALIDATIONS;
 
   constructor() {
     super(...arguments);
@@ -36,12 +40,17 @@ export default class AuthenticatedSettings extends Controller {
   }
 
   @action
-  handleSave(event: SubmitEvent) {
+  onSubmit(event: SubmitEvent) {
     event.preventDefault();
 
     this.isLoading = true;
     this.changeset.save().then(() => {
       this.isLoading = false;
+
+      this.showSuccessMessage = true;
+      later(() => {
+        this.showSuccessMessage = false;
+      }, 3000);
     });
   }
 }

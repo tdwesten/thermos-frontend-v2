@@ -8,6 +8,7 @@ interface ValidatedInputArgs {
   id: string;
   type: "text" | "textarea" | "password" | "email" | "checkbox" | "number";
   valuePath: string;
+  value?: any;
 }
 
 type ValidationErr = {
@@ -36,6 +37,14 @@ export default class ValidatedInput extends Component<ValidatedInputArgs> {
     });
   }
 
+  get value() {
+    if (this.args.value) {
+      return this.args.value;
+    }
+
+    return this.args.changeset[this.args.valuePath];
+  }
+
   get errorMessage() {
     return this.errors.length > 0 ? this.errors[0]?.validation[0] : undefined;
   }
@@ -59,7 +68,7 @@ export default class ValidatedInput extends Component<ValidatedInputArgs> {
   }
 
   @action
-  handleOnBlur(event: Event) {
+  handleOnBlur() {
     this.hasBlurred = true;
   }
 }

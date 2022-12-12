@@ -11,6 +11,7 @@ export default class Thermostat extends Model {
   @attr("date") declare updatedAt: Date;
   @attr("boolean") declare isHeating: boolean;
   @attr("string") declare mode: string;
+  @attr("string") declare token: string;
 
   @belongsTo("program", { async: true, inverse: null })
   declare currentProgram: Program;

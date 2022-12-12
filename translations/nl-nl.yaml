@@ -33,7 +33,7 @@ header_title.settings: Instellingen
 programs.create_program: Nieuw progamma aanmaken
 settings_description: Set hier je Thermos naar eigen wens in.
 label.min-temp: Fallback temperature
-placeholder.min-temp: "Minimale temperature wanneer er geen programma is "
+placeholder.min-temp: 'Minimale temperature wanneer er geen programma is '
 button.save: Opslaan
 header_title.programs.edit: Programma aanpassen
 label.start-time: Starttijd
@@ -62,3 +62,8 @@ widget.status.manual: Standby..
 widget.status.manual.heating: Verwarmen naar {targetTemperature}°C
 widget.status.program: Volgt programa "{progam}".. Richt temperature is {targetTemperature}°C
 widget.status.program.heating: Verwarmen volgens {program} naar {targetTemperature}°C
+header_title.connection: Thermos API Connection infomatie
+label.endpoint: Endpoint
+placeholder.endpoint: Endpoint
+label.token: Token
+thermostat.update.success: Instellingen zijn succesvol opgeslagen.

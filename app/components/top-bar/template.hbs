@@ -26,6 +26,7 @@
         @route={{item.route}}
         @activeClass="text-orange-500 dark:text-orange-500"
         class="flex items-center justify-start w-full p-4 border-b border-gray-300 hover:bg-gray-100 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700"
+        {{on "click" this.toggleMenu}}
       >
         <Icon @name={{item.icon}} class="mr-4" />
         {{item.title}}

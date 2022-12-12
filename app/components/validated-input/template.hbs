@@ -16,7 +16,8 @@
     @disabled={{@disabled}}
     autofocus={{@autofocus}}
     tabindex="{{@tabindex}}"
-    @value={{get @changeset @valuePath}}
+    readonly={{@readonly}}
+    @value={{if @value @value (get @changeset @valuePath)}}
     pattern={{@pattern}}
     {{on "blur" this.handleOnBlur}}
     ...attributes
