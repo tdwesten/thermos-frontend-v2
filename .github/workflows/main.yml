@@ -33,7 +33,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build application
-        run: yarn run build --environment=${{secrets.ENV_NAME}}
+        run: yarn run build --environment=${{secrets.ENV_NAME}} --production
 
       - name: Deploy with rsync
         run: rsync -avz --omit-dir-times -r dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}

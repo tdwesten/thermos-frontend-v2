@@ -31,7 +31,7 @@ module.exports = function (environment) {
   }
 
   if (environment === "staging") {
-    ENV["APP"]["apiHost"] = "https://thermos-api.thomasvanderwesten.nl/api/";
+    ENV["APP"]["apiHost"] = "https://thermos-api.thomasvanderwesten.nl/api";
   }
 
   if (environment === "production") {
