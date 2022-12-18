@@ -9,19 +9,23 @@ import { BufferedChangeset } from "validated-changeset";
 import { Changeset } from "ember-changeset";
 import lookupValidator from "ember-changeset-validations";
 import CurrentThermostatService from "../../services/current-thermostat";
+import NotificationsService, {
+  NotificationType,
+} from "../../services/notifications";
 import SessionService from "../../services/session";
 import THERMOSTAT_VALIDATIONS from "../../validations/thermostat";
-import { later } from "@ember/runloop";
+import IntlService from "ember-intl/services/intl";
 
 export default class AuthenticatedSettings extends Controller {
   @service declare session: SessionService;
   @service declare currentThermostat: CurrentThermostatService;
   @service declare store: Store;
   @service declare router: RouterService;
+  @service declare notifications: NotificationsService;
+  @service declare intl: IntlService;
 
   @tracked declare changeset: BufferedChangeset;
   @tracked isLoading = false;
-  @tracked showSuccessMessage = false;
 
   formValidations = THERMOSTAT_VALIDATIONS;
 
@@ -47,10 +51,13 @@ export default class AuthenticatedSettings extends Controller {
     this.changeset.save().then(() => {
       this.isLoading = false;
 
-      this.showSuccessMessage = true;
-      later(() => {
-        this.showSuccessMessage = false;
-      }, 3000);
+      this.notifications.add({
+        id: "program-created",
+        type: NotificationType.SUCCESS,
+        message: this.intl.t("settings.successfully_updated"),
+        route: "authenticated.dashboard",
+        buttonTitle: this.intl.t("settings.view_dashboard"),
+      });
     });
   }
 }

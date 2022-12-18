@@ -1,0 +1,9 @@
+<div data-component-name="notifications">
+  {{#each this.notificationsList as |notification|}}
+    <FlashMessage
+      @type={{notification.type}}
+      @message={{notification.message}}
+      class="mb-1"
+    />
+  {{/each}}
+</div>

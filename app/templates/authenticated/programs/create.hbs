@@ -1,16 +1,14 @@
 <Form
   @model={{@model}}
   @validation={{this.formValidations}}
-  class="flex flex-col gap-4"
+  @onSubmit={{this.onSubmit}}
+  class="flex flex-col max-w-xl gap-4 m-auto"
   as |form|
 >
   <div class="col-span-6 dark:text-slate-300">
     <h1 class="pb-3 text-2xl font-semibold">
       {{t "header_title.programs.create"}}
     </h1>
-    <p class="pb-3 text-sm text-gray-500 dark:text-slate-400">
-      {{t "header_title.programs.edit_description"}}
-    </p>
   </div>
 
   <ValidatedInput
@@ -39,7 +37,10 @@
     @changeset={{form.changeset}}
     @valuePath="endTime"
   />
-  <label for="isActive">
+  <label
+    for="isActive"
+    class="block mt-1 text-sm font-medium text-gray-700 dark:text-slate-400"
+  >
     <Input
       id="isActive"
       @type="checkbox"
