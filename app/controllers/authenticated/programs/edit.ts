@@ -1,12 +1,15 @@
 import Controller from "@ember/controller";
 import { action } from "@ember/object";
+import RouterService from "@ember/routing/router-service";
+import { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import Program from "../../../models/program";
-import { inject as service } from "@ember/service";
-import RouterService from "@ember/routing/router-service";
-import { later } from "@ember/runloop";
+import NotificationsService, {
+  NotificationType,
+} from "../../../services/notifications";
 export default class AuthenticatedProgramsProgram extends Controller {
   @service declare router: RouterService;
+  @service declare notifications: NotificationsService;
 
   declare model: Program;
 
@@ -15,11 +18,13 @@ export default class AuthenticatedProgramsProgram extends Controller {
   @action
   onSubmit() {
     this.model.save().then(() => {
-      this.showSuccessMessage = true;
-
-      later(() => {
-        this.showSuccessMessage = false;
-      }, 3000);
+      this.notifications.add({
+        id: "program-update",
+        type: NotificationType.SUCCESS,
+        message: "Program updated",
+        route: "authenticated.programs.index",
+        buttonTitle: "View programs",
+      });
     });
   }
 

@@ -39,7 +39,7 @@ export default class WidgetStatus extends Component<WidgetStatusArgs> {
       icon: icon,
       message: this.intl.t(message, {
         targetTemperature: this.targetTemperature,
-        program: this.args.thermostat?.currentProgram.name,
+        program: this.args.thermostat?.currentProgram.get("name"),
       }),
     };
   }

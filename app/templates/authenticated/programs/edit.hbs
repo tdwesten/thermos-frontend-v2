@@ -11,12 +11,6 @@
     </h1>
   </div>
 
-  {{#if this.showSuccessMessage}}
-    <FlashMessage>
-      {{t "programs.update.success"}}
-    </FlashMessage>
-  {{/if}}
-
   <ValidatedInput
     @label={{t "programs.create.name"}}
     @placeholder={{t "programs.create.name.placeholder"}}
