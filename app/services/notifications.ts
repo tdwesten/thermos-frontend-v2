@@ -1,5 +1,6 @@
 import Service from "@ember/service";
-import { tracked } from "@glimmer/tracking";
+import { trackedNested } from "ember-tracked-nested";
+import { action } from "@ember/object";
 
 export type Notification = {
   id: string;
@@ -7,7 +8,7 @@ export type Notification = {
   message: string;
   route: string;
   buttonTitle: string;
-  createdAt?: Date;
+  createdAt?: string;
 };
 
 export enum NotificationType {
@@ -18,7 +19,7 @@ export enum NotificationType {
 }
 
 export default class NotificationsService extends Service {
-  @tracked public notifications: Notification[] = [];
+  @trackedNested public notifications: Notification[] = [];
 
   constructor() {
     super(...arguments);
@@ -32,6 +33,7 @@ export default class NotificationsService extends Service {
     return this.notifications;
   }
 
+  @action
   checkForExpiredNotifications() {
     const now = new Date();
 
@@ -41,7 +43,7 @@ export default class NotificationsService extends Service {
 
     this.notifications.forEach((notification) => {
       if (notification.createdAt) {
-        const diff = now.getTime() - notification.createdAt.getTime();
+        const diff = now.getTime() - new Date(notification.createdAt).getTime();
 
         if (diff > 10000) {
           this.delete(notification);
@@ -51,9 +53,20 @@ export default class NotificationsService extends Service {
   }
 
   add(notification: Notification) {
-    notification.createdAt = new Date();
+    const now = new Date();
+    notification.createdAt = now.toJSON();
+
+    this.deleteDuplicate(notification);
 
     this.notifications.push(notification);
+  }
+
+  deleteDuplicate(notification: Notification) {
+    const duplicate = this.notifications.find((n) => n.id === notification.id);
+
+    if (duplicate) {
+      this.delete(duplicate);
+    }
   }
 
   delete(notification: Notification) {

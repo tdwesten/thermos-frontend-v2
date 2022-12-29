@@ -21,6 +21,11 @@ export default class WidgetStatus extends Component<WidgetStatusArgs> {
     let icon = "mode_standby";
     let message = "widget.status.default";
 
+    if (this.args.thermostat.mode === Mode.Off) {
+      icon = "power";
+      message = "widget.status.off";
+    }
+
     if (this.args.thermostat.mode === Mode.Program) {
       icon = "schedule";
       message = "widget.status.program";

@@ -18,7 +18,52 @@
     </FlashMessage>
   {{/if}}
 
-  <h2 class="pb-3 text-xl font-semibold dark:text-slate-300">
+  <ValidatedInput
+    @changeset={{form.changeset}}
+    @id="name"
+    @type="text"
+    @label={{t "label.name"}}
+    @placeholder={{t "placeholder.thermostat-name"}}
+    @autocomplete=""
+    @valuePath="name"
+  />
+  <ValidatedInput
+    @changeset={{form.changeset}}
+    @id="min-temp"
+    @type="number"
+    @label={{t "label.min-temp"}}
+    @placeholder={{t "placeholder.min-temp"}}
+    @valuePath="minTemperature"
+  />
+
+  <label
+    for="isActive"
+    class="block mt-1 text-sm font-medium text-gray-700 dark:text-slate-400"
+  >
+    <Input
+      id="isActive"
+      @type="checkbox"
+      @checked={{form.changeset.isActive}}
+      @onChange={{fn
+        (mut form.changeset.isActive)
+        (not form.changeset.isActive)
+      }}
+    />
+    {{t "label.is-active"}}
+  </label>
+  <div class="flex justify-between">
+    <Button
+      @type="submit"
+      @isLoading={{form.isLoading}}
+      @disabled={{or form.changeset.isInvalid}}
+      class="col-span-6"
+    >
+      {{t "button.save"}}
+    </Button>
+
+  </div>
+
+  <h2 class="pb-3 mt-6 text-xl font-semibold dark:text-slate-300">
     {{t "header_title.connection"}}
   </h2>
 
@@ -43,37 +88,9 @@
     <Label @id={{@id}}>
       {{t "label.token"}}
     </Label>
+
     <pre>
       {{@model.token}}
     </pre>
-  </div>
-
-  <ValidatedInput
-    @changeset={{form.changeset}}
-    @id="name"
-    @type="text"
-    @label={{t "label.name"}}
-    @placeholder={{t "placeholder.thermostat-name"}}
-    @autocomplete=""
-    @valuePath="name"
-  />
-  <ValidatedInput
-    @changeset={{form.changeset}}
-    @id="min-temp"
-    @type="number"
-    @label={{t "label.min-temp"}}
-    @placeholder={{t "placeholder.min-temp"}}
-    @valuePath="minTemperature"
-  />
-  <div class="flex justify-between">
-    <Button
-      @type="submit"
-      @isLoading={{form.isLoading}}
-      @disabled={{or form.changeset.isInvalid}}
-      class="col-span-6"
-    >
-      {{t "button.save"}}
-    </Button>
-
   </div>
 </Form>

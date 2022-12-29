@@ -10,6 +10,7 @@ export default class Thermostat extends Model {
   @attr("temperature") declare minTemperature: number;
   @attr("date") declare updatedAt: Date;
   @attr("boolean") declare isHeating: boolean;
+  @attr("boolean") declare isActive: boolean;
   @attr("string") declare mode: string;
   @attr("string") declare token: string;
 
@@ -29,6 +30,10 @@ export default class Thermostat extends Model {
 
   get isDefaultMode(): boolean {
     return this.mode === Mode.Default;
+  }
+
+  get isOffMode(): boolean {
+    return this.mode === Mode.Off;
   }
 
   reset = memberAction({
