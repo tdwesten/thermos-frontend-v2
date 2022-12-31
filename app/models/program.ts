@@ -5,8 +5,8 @@ import Thermostat from "./thermostat";
 export default class Program extends Model {
   @attr("string") declare name: string;
   @attr("temperature") declare targetTemperature: number;
-  @attr("string") declare startTime: number;
-  @attr("string") declare endTime: number;
+  @attr("time") declare startTime: number;
+  @attr("time") declare endTime: number;
   @attr("boolean") declare isActive: boolean;
   @attr() declare days: ProgramDays[];
   @belongsTo("thermostat", { async: true, inverse: null })

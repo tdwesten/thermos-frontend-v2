@@ -28,12 +28,14 @@
   <ValidatedInput
     @label={{t "label.startTime"}}
     @type="time"
+    step="60"
     @changeset={{form.changeset}}
     @valuePath="startTime"
   />
   <ValidatedInput
     @label={{t "label.endTime"}}
     @type="time"
+    step="60"
     @changeset={{form.changeset}}
     @valuePath="endTime"
   />
